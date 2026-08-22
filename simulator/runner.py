@@ -88,3 +88,52 @@ def run_all(requests, cache_size):
         )
 
     return results
+
+# ==========================================
+# PHASE 4
+# WORKLOAD SIMULATION
+# ==========================================
+
+def simulate_workload(requests, cache_size):
+
+    print("\n========================================")
+    print(" CACHE WORKLOAD SIMULATION")
+    print("========================================")
+
+    print("Total Requests :", len(requests))
+    print("Cache Size     :", cache_size)
+
+    results = run_all(
+        requests,
+        cache_size
+    )
+
+    print("\n----------------------------------------")
+    print(" CACHE POLICY RESULTS")
+    print("----------------------------------------")
+
+    for policy, result in results.items():
+
+        print("\nPolicy :", policy)
+
+        print(
+            "Hit Rate  :",
+            f"{result['hit_rate'] * 100:.2f}%"
+        )
+
+        print(
+            "Miss Rate :",
+            f"{result['miss_rate'] * 100:.2f}%"
+        )
+
+        print(
+            "Energy    :",
+            result["energy"]
+        )
+
+        print(
+            "Latency   :",
+            result["latency"]
+        )
+
+    return results
