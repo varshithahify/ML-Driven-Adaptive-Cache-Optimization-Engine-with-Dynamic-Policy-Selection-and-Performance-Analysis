@@ -1,107 +1,109 @@
 # ==========================================
-# PHASE 2
-# BASIC CACHE REPLACEMENT POLICIES
+# PHASE 3
+# OPTIMIZED LRU CACHE
+# HashMap + Doubly Linked List
 # ==========================================
 
 
-def lru(requests, cache_size):
-    """
-    Least Recently Used (LRU) cache policy.
-    """
+class Node:
 
-    cache = []
-    hits = 0
-    misses = 0
+    def __init__(self, key):
+        self.key = key
+        self.prev = None
+        self.next = None
 
-    for req in requests:
 
-        if req in cache:
-            # Cache hit
-            hits += 1
+class LRUCache:
 
-            # Move recently used item to the end
-            cache.remove(req)
-            cache.append(req)
+    def __init__(self, capacity):
 
+        self.capacity = capacity
+
+        # HashMap for O(1) lookup
+        self.cache = {}
+
+        # Dummy head and tail nodes
+        self.head = Node(0)
+        self.tail = Node(0)
+
+        self.head.next = self.tail
+        self.tail.prev = self.head
+
+
+    # Remove a node from linked list
+    def remove(self, node):
+
+        prev_node = node.prev
+        next_node = node.next
+
+        prev_node.next = next_node
+        next_node.prev = prev_node
+
+
+    # Insert node at the front
+    # Front = Most Recently Used
+    def insert(self, node):
+
+        node.next = self.head.next
+        node.prev = self.head
+
+        self.head.next.prev = node
+        self.head.next = node
+
+
+    # Access cache item
+    def access(self, key):
+
+        # CACHE HIT
+        if key in self.cache:
+
+            node = self.cache[key]
+
+            # Move accessed item to front
+            self.remove(node)
+            self.insert(node)
+
+            return True
+
+
+        # CACHE MISS
         else:
-            # Cache miss
-            misses += 1
-
-            # Remove least recently used item
-            if len(cache) == cache_size:
-                cache.pop(0)
-
-            # Add new item
-            cache.append(req)
-
-    return hits, misses
-
-
-def fifo(requests, cache_size):
-    """
-    First In First Out (FIFO) cache policy.
-    """
-
-    cache = []
-    hits = 0
-    misses = 0
-
-    for req in requests:
-
-        if req in cache:
-            # Cache hit
-            hits += 1
-
-        else:
-            # Cache miss
-            misses += 1
-
-            # Remove oldest item
-            if len(cache) == cache_size:
-                cache.pop(0)
-
-            # Add new item
-            cache.append(req)
-
-    return hits, misses
-
-
-def lfu(requests, cache_size):
-    """
-    Least Frequently Used (LFU) cache policy.
-    """
-
-    cache = []
-    frequency = {}
-
-    hits = 0
-    misses = 0
-
-    for req in requests:
-
-        if req in cache:
-            # Cache hit
-            hits += 1
-            frequency[req] += 1
-
-        else:
-            # Cache miss
-            misses += 1
 
             # Cache is full
-            if len(cache) == cache_size:
+            if len(self.cache) == self.capacity:
 
-                # Find least frequently used item
-                lfu_item = min(
-                    cache,
-                    key=lambda x: frequency[x]
-                )
+                # Least Recently Used item
+                lru = self.tail.prev
 
-                cache.remove(lfu_item)
-                del frequency[lfu_item]
+                self.remove(lru)
 
-            # Add new item
-            cache.append(req)
-            frequency[req] = 1
+                del self.cache[lru.key]
+
+
+            # Create new node
+            new_node = Node(key)
+
+            # Insert as Most Recently Used
+            self.insert(new_node)
+
+            self.cache[key] = new_node
+
+            return False
+
+
+# Optimized LRU simulation
+def lru_optimized(requests, cache_size):
+
+    cache = LRUCache(cache_size)
+
+    hits = 0
+    misses = 0
+
+    for req in requests:
+
+        if cache.access(req):
+            hits += 1
+        else:
+            misses += 1
 
     return hits, misses
