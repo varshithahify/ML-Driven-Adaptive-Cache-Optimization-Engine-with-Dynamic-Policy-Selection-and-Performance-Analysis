@@ -20,14 +20,14 @@ def extract_features(requests):
         }
 
     # ==========================================
-    # 1. UNIQUE COUNT
+    # UNIQUE COUNT
     # ==========================================
 
     unique_count = len(set(requests))
 
 
     # ==========================================
-    # 2. REPETITION RATIO
+    # REPETITION RATIO
     # ==========================================
 
     repetition_ratio = 1 - (
@@ -36,7 +36,7 @@ def extract_features(requests):
 
 
     # ==========================================
-    # 3. SEQUENTIALITY
+    # SEQUENTIALITY
     # ==========================================
 
     sequential_count = 0
@@ -50,7 +50,7 @@ def extract_features(requests):
 
 
     # ==========================================
-    # 4. FREQUENCY VARIANCE
+    # FREQUENCY VARIANCE
     # ==========================================
 
     frequency = Counter(requests)
