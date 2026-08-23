@@ -1,83 +1,22 @@
 # ==========================================
-# PHASE 4
-# CACHE WORKLOAD SIMULATION
+# AI CACHE OPTIMIZATION ENGINE
+# MAIN PROGRAM
 # ==========================================
 
-from simulator.workloads import (
-    sequential_workload,
-    repetitive_workload,
-    random_workload,
-    mixed_workload
-)
-
-from simulator.runner import simulate_workload
+from ml.dataset_generator import generate_dataset
 
 
 print("========================================")
 print(" AI CACHE OPTIMIZATION ENGINE")
-print(" PHASE 4 - WORKLOAD SIMULATION")
+print(" PHASE 6 - DATASET GENERATION")
 print("========================================")
 
-
-cache_size = 5
-
-
-# ==========================================
-# SEQUENTIAL WORKLOAD
-# ==========================================
-
-print("\n\n========== SEQUENTIAL WORKLOAD ==========")
-
-requests = sequential_workload(100)
-
-simulate_workload(
-    requests,
-    cache_size
+generate_dataset(
+    samples=300,
+    cache_size=5
 )
 
-
-# ==========================================
-# REPETITIVE WORKLOAD
-# ==========================================
-
-print("\n\n========== REPETITIVE WORKLOAD ==========")
-
-requests = repetitive_workload(100)
-
-simulate_workload(
-    requests,
-    cache_size
-)
-
-
-# ==========================================
-# RANDOM WORKLOAD
-# ==========================================
-
-print("\n\n========== RANDOM WORKLOAD ==========")
-
-requests = random_workload(100)
-
-simulate_workload(
-    requests,
-    cache_size
-)
-
-
-# ==========================================
-# MIXED WORKLOAD
-# ==========================================
-
-print("\n\n========== MIXED WORKLOAD ==========")
-
-requests = mixed_workload(100)
-
-simulate_workload(
-    requests,
-    cache_size
-)
-
-
-print("\n========================================")
-print(" PHASE 4 COMPLETED")
+print()
+print("========================================")
+print(" PHASE 6 COMPLETED")
 print("========================================")
