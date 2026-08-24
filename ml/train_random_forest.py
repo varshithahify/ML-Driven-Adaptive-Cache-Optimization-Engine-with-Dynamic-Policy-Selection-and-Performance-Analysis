@@ -17,18 +17,12 @@ def train_random_forest():
     print("========================================")
 
     # Load dataset
-    data = pd.read_csv(
-        "datasets/dataset.csv"
-    )
+    data = pd.read_csv("datasets/dataset.csv")
 
     print("Dataset Loaded Successfully!")
     print("Total Samples :", len(data))
 
-
-    # ==========================================
-    # INPUT FEATURES
-    # ==========================================
-
+    # Input features
     X = data[
         [
             "unique_count",
@@ -38,18 +32,10 @@ def train_random_forest():
         ]
     ]
 
-
-    # ==========================================
-    # TARGET
-    # ==========================================
-
+    # Target
     y = data["best_policy"]
 
-
-    # ==========================================
-    # TRAIN / TEST SPLIT
-    # ==========================================
-
+    # Split dataset
     X_train, X_test, y_train, y_test = train_test_split(
         X,
         y,
@@ -61,58 +47,36 @@ def train_random_forest():
     print("Training Samples :", len(X_train))
     print("Testing Samples  :", len(X_test))
 
-
-    # ==========================================
-    # CREATE MODEL
-    # ==========================================
-
+    # Create model
     model = RandomForestClassifier(
         n_estimators=100,
         random_state=42
     )
 
-
-    # ==========================================
-    # TRAIN
-    # ==========================================
-
     print("\nTraining Random Forest...")
 
-    model.fit(
-        X_train,
-        y_train
-    )
+    # Train
+    model.fit(X_train, y_train)
 
-
-    # ==========================================
-    # EVALUATE
-    # ==========================================
-
+    # Accuracy
     accuracy = model.score(
         X_test,
         y_test
     )
 
     print("Training Completed!")
-
     print(
         f"Random Forest Accuracy : "
         f"{accuracy * 100:.2f}%"
     )
 
-
-    # ==========================================
-    # SAVE MODEL
-    # ==========================================
-
+    # Save model
     joblib.dump(
         model,
-        "models/random_forest.pkl"
+        "ml/random_forest.pkl"
     )
 
-    print(
-        "Random Forest Saved Successfully!"
-    )
+    print("Random Forest Saved Successfully!")
 
     return model, accuracy
 

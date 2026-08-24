@@ -17,18 +17,12 @@ def train_decision_tree():
     print("========================================")
 
     # Load dataset
-    data = pd.read_csv(
-        "datasets/dataset.csv"
-    )
+    data = pd.read_csv("datasets/dataset.csv")
 
     print("Dataset Loaded Successfully!")
     print("Total Samples :", len(data))
 
-
-    # ==========================================
-    # INPUT FEATURES
-    # ==========================================
-
+    # Input features
     X = data[
         [
             "unique_count",
@@ -38,18 +32,10 @@ def train_decision_tree():
         ]
     ]
 
-
-    # ==========================================
-    # TARGET
-    # ==========================================
-
+    # Target
     y = data["best_policy"]
 
-
-    # ==========================================
-    # TRAIN / TEST SPLIT
-    # ==========================================
-
+    # Split dataset
     X_train, X_test, y_train, y_test = train_test_split(
         X,
         y,
@@ -61,57 +47,35 @@ def train_decision_tree():
     print("Training Samples :", len(X_train))
     print("Testing Samples  :", len(X_test))
 
-
-    # ==========================================
-    # CREATE MODEL
-    # ==========================================
-
+    # Create model
     model = DecisionTreeClassifier(
         random_state=42
     )
 
-
-    # ==========================================
-    # TRAIN
-    # ==========================================
-
     print("\nTraining Decision Tree...")
 
-    model.fit(
-        X_train,
-        y_train
-    )
+    # Train
+    model.fit(X_train, y_train)
 
-
-    # ==========================================
-    # EVALUATE
-    # ==========================================
-
+    # Accuracy
     accuracy = model.score(
         X_test,
         y_test
     )
 
     print("Training Completed!")
-
     print(
         f"Decision Tree Accuracy : "
         f"{accuracy * 100:.2f}%"
     )
 
-
-    # ==========================================
-    # SAVE MODEL
-    # ==========================================
-
+    # Save model
     joblib.dump(
         model,
-        "models/decision_tree.pkl"
+        "ml/decision_tree.pkl"
     )
 
-    print(
-        "Decision Tree Saved Successfully!"
-    )
+    print("Decision Tree Saved Successfully!")
 
     return model, accuracy
 
