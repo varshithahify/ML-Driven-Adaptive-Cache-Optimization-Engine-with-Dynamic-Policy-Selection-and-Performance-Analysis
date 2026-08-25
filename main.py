@@ -1,30 +1,53 @@
 # ==========================================
-# PHASE 10
-# AI CACHE POLICY INTEGRATION
+# PHASE 6
+# DATASET GENERATION IMPROVEMENT
+# main.py
+# ==========================================
+# PHASE 7.1
+# DECISION TREE TRAINING
+# ==========================================
+#Phase 7.2
+#MODEL COMPARISON
+# ==========================================
+# PHASE 7
+# MACHINE LEARNING MODEL TRAINING
+# DECISION TREE + RANDOM FOREST
+# ==========================================
+# ==========================================
+# PHASE 8
+# MODEL EVALUATION
+# ==========================================
+# PHASE 9
+# AI CACHE POLICY PREDICTION
 # ==========================================
 
-from simulator.workloads import mixed_workload
-from simulator.runner import run_all
+from simulator.workloads import (
+    random_workload,
+    sequential_workload,
+    repetitive_workload,
+    mixed_workload
+)
+
 from ml.predictor import predict_policy
 
 
 print("========================================")
-print(" AI CACHE OPTIMIZATION ENGINE")
-print(" PHASE 10 - AI POLICY INTEGRATION")
+print(" AI CACHE PROJECT")
+print(" PHASE 9 - AI POLICY PREDICTION")
 print("========================================")
 
 
 # ==========================================
-# GENERATE WORKLOAD
+# GENERATE NEW WORKLOAD
 # ==========================================
 
 requests = mixed_workload(100)
 
-cache_size = 5
 
-print("\nWorkload Generated!")
-print("Total Requests :", len(requests))
-print("Cache Size     :", cache_size)
+print("\nNew Workload Generated!")
+
+print("\nFirst 20 Memory Requests:")
+print(requests[:20])
 
 
 # ==========================================
@@ -33,16 +56,6 @@ print("Cache Size     :", cache_size)
 
 predicted_policy, features = predict_policy(
     requests
-)
-
-
-print("\n========================================")
-print(" AI PREDICTION")
-print("========================================")
-
-print(
-    "Predicted Best Cache Policy :",
-    predicted_policy
 )
 
 
@@ -55,17 +68,17 @@ print(" WORKLOAD FEATURES")
 print("========================================")
 
 print(
-    "Unique Count       :",
+    "Unique Count :",
     features["unique_count"]
 )
 
 print(
-    "Repetition Ratio   :",
+    "Repetition Ratio :",
     features["repetition_ratio"]
 )
 
 print(
-    "Sequentiality      :",
+    "Sequentiality :",
     features["sequentiality"]
 )
 
@@ -76,87 +89,19 @@ print(
 
 
 # ==========================================
-# RUN ALL POLICIES
-# ==========================================
-
-results = run_all(
-    requests,
-    cache_size
-)
-
-
-# ==========================================
-# DISPLAY RESULTS
+# DISPLAY AI PREDICTION
 # ==========================================
 
 print("\n========================================")
-print(" CACHE POLICY PERFORMANCE")
-print("========================================")
-
-for policy, result in results.items():
-
-    print("\nPolicy :", policy)
-
-    print(
-        "Hit Rate  :",
-        f"{result['hit_rate'] * 100:.2f}%"
-    )
-
-    print(
-        "Miss Rate :",
-        f"{result['miss_rate'] * 100:.2f}%"
-    )
-
-    print(
-        "Energy    :",
-        result["energy"]
-    )
-
-    print(
-        "Latency   :",
-        result["latency"]
-    )
-
-
-# ==========================================
-# AI SELECTED POLICY RESULT
-# ==========================================
-
-selected_result = results[
-    predicted_policy
-]
-
-
-print("\n========================================")
-print(" AI SELECTED POLICY PERFORMANCE")
+print(" AI PREDICTION")
 print("========================================")
 
 print(
-    "Selected Policy :",
+    "Predicted Best Cache Policy :",
     predicted_policy
-)
-
-print(
-    "Hit Rate :",
-    f"{selected_result['hit_rate'] * 100:.2f}%"
-)
-
-print(
-    "Miss Rate :",
-    f"{selected_result['miss_rate'] * 100:.2f}%"
-)
-
-print(
-    "Energy :",
-    selected_result["energy"]
-)
-
-print(
-    "Latency :",
-    selected_result["latency"]
 )
 
 
 print("\n========================================")
-print(" PHASE 10 COMPLETED")
+print(" PHASE 9 COMPLETED")
 print("========================================")

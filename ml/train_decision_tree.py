@@ -1,6 +1,6 @@
 # ==========================================
 # PHASE 7.1
-# DECISION TREE MODEL TRAINING
+# DECISION TREE MODEL
 # ==========================================
 
 import pandas as pd
@@ -12,9 +12,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 def train_decision_tree():
 
-    print("\n========================================")
-    print(" PHASE 7.1 - DECISION TREE")
-    print("========================================")
+    print("\n========== DECISION TREE ==========")
 
     # Load dataset
     data = pd.read_csv("datasets/dataset.csv")
@@ -32,10 +30,12 @@ def train_decision_tree():
         ]
     ]
 
-    # Target
+    # Output label
     y = data["best_policy"]
 
-    # Split dataset
+    # Split dataset:
+    # 80% training
+    # 20% testing
     X_train, X_test, y_train, y_test = train_test_split(
         X,
         y,
@@ -44,41 +44,28 @@ def train_decision_tree():
         stratify=y
     )
 
-    print("Training Samples :", len(X_train))
-    print("Testing Samples  :", len(X_test))
-
-    # Create model
+    # Create Decision Tree
     model = DecisionTreeClassifier(
         random_state=42
     )
 
     print("\nTraining Decision Tree...")
 
-    # Train
+    # Train model
     model.fit(X_train, y_train)
 
-    # Accuracy
-    accuracy = model.score(
-        X_test,
-        y_test
-    )
+    # Calculate accuracy
+    accuracy = model.score(X_test, y_test)
 
     print("Training Completed!")
-    print(
-        f"Decision Tree Accuracy : "
-        f"{accuracy * 100:.2f}%"
-    )
+    print(f"Decision Tree Accuracy : {accuracy * 100:.2f}%")
 
-    # Save model
+    # Save Decision Tree
     joblib.dump(
         model,
-        "ml/decision_tree.pkl"
+        "models/decision_tree.pkl"
     )
 
     print("Decision Tree Saved Successfully!")
 
     return model, accuracy
-
-
-if __name__ == "__main__":
-    train_decision_tree()

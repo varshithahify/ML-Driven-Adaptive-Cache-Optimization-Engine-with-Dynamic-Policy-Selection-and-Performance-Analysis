@@ -24,13 +24,10 @@ def evaluate_model():
     # LOAD DATASET
     # ==========================================
 
-    data = pd.read_csv(
-        "datasets/dataset.csv"
-    )
+    data = pd.read_csv("datasets/dataset.csv")
 
     print("\nDataset Loaded Successfully!")
     print("Total Samples :", len(data))
-
 
     # ==========================================
     # INPUT FEATURES
@@ -45,16 +42,14 @@ def evaluate_model():
         ]
     ]
 
-
     # ==========================================
     # OUTPUT LABEL
     # ==========================================
 
     y = data["best_policy"]
 
-
     # ==========================================
-    # SAME TRAIN / TEST SPLIT
+    # SAME TRAIN / TEST SPLIT AS PHASE 7
     # ==========================================
 
     X_train, X_test, y_train, y_test = train_test_split(
@@ -67,26 +62,21 @@ def evaluate_model():
 
     print("Testing Samples :", len(X_test))
 
-
     # ==========================================
     # LOAD BEST MODEL
     # ==========================================
 
     model = joblib.load(
-        "ml/cache_model.pkl"
+        "models/cache_model.pkl"
     )
 
     print("\nBest Model Loaded Successfully!")
-
 
     # ==========================================
     # MAKE PREDICTIONS
     # ==========================================
 
-    predictions = model.predict(
-        X_test
-    )
-
+    predictions = model.predict(X_test)
 
     # ==========================================
     # ACCURACY
@@ -102,10 +92,8 @@ def evaluate_model():
     print("========================================")
 
     print(
-        f"Model Accuracy : "
-        f"{accuracy * 100:.2f}%"
+        f"Model Accuracy : {accuracy * 100:.2f}%"
     )
-
 
     # ==========================================
     # CLASSIFICATION REPORT
@@ -123,14 +111,11 @@ def evaluate_model():
         )
     )
 
-
     # ==========================================
     # CONFUSION MATRIX
     # ==========================================
 
-    labels = sorted(
-        y.unique()
-    )
+    labels = sorted(y.unique())
 
     matrix = confusion_matrix(
         y_test,
@@ -147,7 +132,6 @@ def evaluate_model():
 
     print("\nConfusion Matrix:")
     print(matrix)
-
 
     print("\n========================================")
     print(" MODEL EVALUATION COMPLETED")

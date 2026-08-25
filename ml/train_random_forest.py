@@ -1,6 +1,6 @@
 # ==========================================
 # PHASE 7.2
-# RANDOM FOREST MODEL TRAINING
+# RANDOM FOREST MODEL
 # ==========================================
 
 import pandas as pd
@@ -12,9 +12,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 def train_random_forest():
 
-    print("\n========================================")
-    print(" PHASE 7.2 - RANDOM FOREST")
-    print("========================================")
+    print("\n========== RANDOM FOREST ==========")
 
     # Load dataset
     data = pd.read_csv("datasets/dataset.csv")
@@ -32,10 +30,12 @@ def train_random_forest():
         ]
     ]
 
-    # Target
+    # Output label
     y = data["best_policy"]
 
-    # Split dataset
+    # Split dataset:
+    # 80% training
+    # 20% testing
     X_train, X_test, y_train, y_test = train_test_split(
         X,
         y,
@@ -44,10 +44,7 @@ def train_random_forest():
         stratify=y
     )
 
-    print("Training Samples :", len(X_train))
-    print("Testing Samples  :", len(X_test))
-
-    # Create model
+    # Create Random Forest
     model = RandomForestClassifier(
         n_estimators=100,
         random_state=42
@@ -55,31 +52,21 @@ def train_random_forest():
 
     print("\nTraining Random Forest...")
 
-    # Train
+    # Train model
     model.fit(X_train, y_train)
 
-    # Accuracy
-    accuracy = model.score(
-        X_test,
-        y_test
-    )
+    # Calculate accuracy
+    accuracy = model.score(X_test, y_test)
 
     print("Training Completed!")
-    print(
-        f"Random Forest Accuracy : "
-        f"{accuracy * 100:.2f}%"
-    )
+    print(f"Random Forest Accuracy : {accuracy * 100:.2f}%")
 
-    # Save model
+    # Save Random Forest
     joblib.dump(
         model,
-        "ml/random_forest.pkl"
+        "models/random_forest.pkl"
     )
 
     print("Random Forest Saved Successfully!")
 
     return model, accuracy
-
-
-if __name__ == "__main__":
-    train_random_forest()

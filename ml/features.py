@@ -1,8 +1,4 @@
-# ==========================================
-# PHASE 5
-# WORKLOAD FEATURE EXTRACTION
-# ==========================================
-
+#phase 5
 from collections import Counter
 import statistics
 
@@ -11,72 +7,31 @@ def extract_features(requests):
 
     total = len(requests)
 
-    if total == 0:
-        return {
-            "unique_count": 0,
-            "repetition_ratio": 0,
-            "sequentiality": 0,
-            "frequency_variance": 0
-        }
+    # Unique Count
+    unique = len(set(requests))
 
-    # ==========================================
-    # UNIQUE COUNT
-    # ==========================================
+    # Repetition Ratio
+    repetition = 1 - (unique / total)
 
-    unique_count = len(set(requests))
-
-
-    # ==========================================
-    # REPETITION RATIO
-    # ==========================================
-
-    repetition_ratio = 1 - (
-        unique_count / total
-    )
-
-
-    # ==========================================
-    # SEQUENTIALITY
-    # ==========================================
-
-    sequential_count = 0
+    # Sequentiality
+    seq_count = 0
 
     for i in range(1, total):
 
         if requests[i] == requests[i - 1] + 1:
-            sequential_count += 1
+            seq_count += 1
 
-    sequentiality = sequential_count / total
+    sequentiality = seq_count / total
 
+    # Frequency Variance
+    freq = Counter(requests)
 
-    # ==========================================
-    # FREQUENCY VARIANCE
-    # ==========================================
-
-    frequency = Counter(requests)
-
-    frequency_values = list(
-        frequency.values()
-    )
-
-    if len(frequency_values) > 1:
-
-        frequency_variance = statistics.variance(
-            frequency_values
-        )
-
-    else:
-
-        frequency_variance = 0
-
-
-    # ==========================================
-    # RETURN FEATURES
-    # ==========================================
+    variance = statistics.variance(freq.values()) \
+        if len(freq.values()) > 1 else 0
 
     return {
-        "unique_count": unique_count,
-        "repetition_ratio": repetition_ratio,
+        "unique_count": unique,
+        "repetition_ratio": repetition,
         "sequentiality": sequentiality,
-        "frequency_variance": frequency_variance
+        "frequency_variance": variance
     }

@@ -1,78 +1,30 @@
-# ==========================================
-# PHASE 4
-# CACHE WORKLOAD GENERATION
-# ==========================================
-
+#phase 4
 import random
-
-
-# ==========================================
-# SEQUENTIAL WORKLOAD
-# ==========================================
-
+# Sequential pattern
 def sequential_workload(size):
-
     return list(range(size))
-
-
-# ==========================================
-# REPETITIVE WORKLOAD
-# ==========================================
-
+# Repetitive pattern
 def repetitive_workload(size):
-
     base = [1, 2, 3]
-
-    return [
-        random.choice(base)
-        for _ in range(size)
-    ]
-
-
-# ==========================================
-# RANDOM WORKLOAD
-# ==========================================
-
+    return [random.choice(base) for _ in range(size)]
+# Random pattern
 def random_workload(size):
-
-    return [
-        random.randint(1, 20)
-        for _ in range(size)
-    ]
-
-
-# ==========================================
-# MIXED WORKLOAD
-# ==========================================
-
+    return [random.randint(1, 20) for _ in range(size)]
+# Mixed pattern
 def mixed_workload(size):
-
     data = []
 
     for _ in range(size):
 
-        pattern = random.choice([
-            "sequential",
-            "repetitive",
-            "random"
-        ])
+        choice = random.choice(["seq", "rep", "rand"])
 
-        if pattern == "sequential":
+        if choice == "seq":
+            data.append(random.randint(1, 50))
 
-            data.append(
-                random.randint(1, 50)
-            )
-
-        elif pattern == "repetitive":
-
-            data.append(
-                random.choice([1, 2, 3])
-            )
+        elif choice == "rep":
+            data.append(random.choice([1, 2, 3]))
 
         else:
-
-            data.append(
-                random.randint(1, 20)
-            )
+            data.append(random.randint(1, 20))
 
     return data
