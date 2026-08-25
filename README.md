@@ -147,12 +147,7 @@ Predicted Best Cache Policy : LFU
 ---
 
 ### 14. Project structure
-
-Use your **actual structure**:
-
-```markdown
 ## 📁 Project Structure
-
 ```text
 ML-Driven-Adaptive-Cache-Optimization-Engine/
 │
