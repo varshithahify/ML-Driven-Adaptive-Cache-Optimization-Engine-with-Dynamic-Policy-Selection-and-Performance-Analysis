@@ -38,3 +38,20 @@ Memory Access Workload
  Performance Evaluation
           ↓
 Hit Rate | Miss Rate | Energy | Latency
+
+
+---
+
+### 7. Cache policies
+
+```markdown
+## 🧠 Cache Replacement Policies
+
+The project implements:
+
+| Policy | Description |
+|--------|-------------|
+| LRU | Removes the least recently used cache entry |
+| FIFO | Removes the oldest cache entry |
+| LFU | Removes the least frequently used cache entry |
+| LRU-OPT | Optimized LRU implementation |
