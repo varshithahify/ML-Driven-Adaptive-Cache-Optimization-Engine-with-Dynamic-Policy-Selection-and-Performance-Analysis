@@ -38,13 +38,8 @@ Memory Access Workload
  Performance Evaluation
           ↓
 Hit Rate | Miss Rate | Energy | Latency
-
-
+```
 ---
-
-### 7. Cache policies
-
-```markdown
 ## 🧠 Cache Replacement Policies
 
 The project implements:
