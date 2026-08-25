@@ -1,4 +1,5 @@
 **ML-Driven Adaptive Cache Optimization Engine with Dynamic Policy Selection and Performance Analysis**
+
 An ML-based system that analyzes memory-access workloads and predicts a suitable cache replacement policy to improve simulated cache performance.
 
 ## 🎯 Problem Statement
@@ -142,8 +143,17 @@ Predicted Best Cache Policy : LFU
                   └──────────────────┘
 
 
+
 ---
+
+### 14. Project structure
+
+Use your **actual structure**:
+
+```markdown
 ## 📁 Project Structure
+
+```text
 ML-Driven-Adaptive-Cache-Optimization-Engine/
 │
 ├── core/
@@ -176,9 +186,9 @@ ML-Driven-Adaptive-Cache-Optimization-Engine/
 │
 ├── main.py
 ├── test_features.py
-└── README.md                  
+└── README.md
+```
 
----
 ## 🛠️ Tech Stack
 **Language**
 - Python
